@@ -9,16 +9,16 @@ class Pet(models.Model):
 
     date_of_birth = models.DateField(blank=True, null=True, )
 
-    slug = models.SlugField(blank=True, unique=True, )
+    slug = models.SlugField(blank=True, unique=True, null=True, )
 
     def save(self, *args, **kwargs):
-
         if not self.id:
-            super().save(*args, **kwargs)
+            super().save( *args, **kwargs)
 
         if not self.slug:
             self.slug = slugify(f"{self.name}-{self.id}")
-            super().save(*args, **kwargs)
+
+            super().save( *args, **kwargs)
 
     def __str__(self):
         return self.name
