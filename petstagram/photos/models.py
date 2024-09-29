@@ -32,3 +32,25 @@ class Photo(models.Model):
 
     def __str__(self):
         return self.description
+
+
+class Comment(models.Model):
+    comment_text = models.TextField(
+        blank=False,
+        null=False,
+        max_length=300,
+    )
+    date_time_of_publication = models.DateTimeField(
+        auto_now_add=True,
+    )
+    to_photo = models.ForeignKey(
+        to=Photo,
+        on_delete=models.CASCADE,
+    )
+
+
+class Like(models.Model):
+    to_photo = models.ForeignKey(
+        to=Photo,
+        on_delete=models.CASCADE
+    )
